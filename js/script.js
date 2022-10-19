@@ -1,4 +1,4 @@
-const apiKey = "76df64de685f0742d07119432e1f5b0b";
+const apiKey = "your_key_here";
 const apiCountryURL = "https://countryflagsapi.com/png/";
 
 // https://api.openweathermap.org/data/2.5/weather?
@@ -34,12 +34,6 @@ const getWeatherData = async (city) => {
 const showWeatherData = async (city) => {
   const data = await getWeatherData(city);
 
-  const timeNascerSol = data.sys.sunrise * 1000;
-  const nascerSol = new Date(timeNascerSol);
-
-  const timePorSol = data.sys.sunset * 1000;
-  const porSol = new Date(timePorSol);
-
   cityElement.innerHTML = data.name;
   tempElement.innerHTML = `Temperatura: ` + parseInt(data.main.temp);
   feelsLikeElement.innerHTML = `Térmica: ` + parseInt(data.main.feels_like);
@@ -47,6 +41,12 @@ const showWeatherData = async (city) => {
   maxTempElement.innerHTML = `Máxima: ` + parseInt(data.main.temp_max);
   descElement.innerHTML = data.weather[0].description;
 
+  /* tratando as horas */
+  const timeNascerSol = data.sys.sunrise * 1000;
+  const nascerSol = new Date(timeNascerSol);
+  const timePorSol = data.sys.sunset * 1000;
+  const porSol = new Date(timePorSol);
+  
   /* Sunrise */
   {
     sunriseElement.innerHTML = `Nascer do sol: ${
