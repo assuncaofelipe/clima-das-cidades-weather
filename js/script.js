@@ -34,22 +34,37 @@ const getWeatherData = async (city) => {
 const showWeatherData = async (city) => {
   const data = await getWeatherData(city);
 
+  const timeNascerSol = data.sys.sunrise * 1000;
+  const nascerSol = new Date(timeNascerSol);
+
+  const timePorSol = data.sys.sunset * 1000;
+  const porSol = new Date(timePorSol);
+
   cityElement.innerHTML = data.name;
   tempElement.innerHTML = `Temperatura: ` + parseInt(data.main.temp);
   feelsLikeElement.innerHTML = `Térmica: ` + parseInt(data.main.feels_like);
   minTempElement.innerHTML = `Mínima: ` + parseInt(data.main.temp_min);
   maxTempElement.innerHTML = `Máxima: ` + parseInt(data.main.temp_max);
-
   descElement.innerHTML = data.weather[0].description;
 
-  /* Setar as horas certas do Nascer e do Pôr do Sol */
-  sunriseElement.innerHTML = data.sys.sunrise;
-  sunsetElement.innerHTML = data.sys.sunset;
-
+  /* Sunrise */
+  {
+    sunriseElement.innerHTML = `Nascer do sol: ${
+      nascerSol.getHours()+"h "+ 
+      nascerSol.getMinutes()+"m" + " - Horário local"} `;
+  }
+  /* Sunset */
+  {
+    sunsetElement.innerHTML = `Pôr do sol: ${
+      porSol.getHours()+"h "+
+      porSol.getMinutes()+"m" + " - Horário local"} `; 
+  }
+  
   weatherIconElement.setAttribute(
     "src",
     `http://openweathermap.org/img/wn/${data.weather[0].icon}.png`
   );
+  
   countryElement.setAttribute("src", apiCountryURL + data.sys.country);
   humidityElement.innerHTML = `${data.main.humidity}%`;
   windElement.innerHTML = `${data.wind.speed}km/h`;
@@ -57,11 +72,10 @@ const showWeatherData = async (city) => {
   weatherContainer.classList.remove("hide");
 };
 
-// ev
+// EVENTOS
 searchBtn.addEventListener("click", (e) => {
   e.preventDefault();
   const city = cityInput.value;
-
   showWeatherData(city);
 });
 

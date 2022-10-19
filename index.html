@@ -16,9 +16,13 @@
 </head>
 
 <body>
-    <div class="container">
+
+    <div class="container" style="min-width: 500px; max-width: 500px;">
+        <div class="titulo" style="margin-bottom: 30px;">
+            <h3> Pesquise uma cidade para saber o Clima, Nascer e Pôr do sol com Open Weather Map. </h3>
+        </div>
+
         <div class="form">
-            <h3>Confira o clima de uma cidade:</h3>
             <div class="form-input-container">
                 <input type="text" placeholder="pesquisar cidade..." id="city-input" />
                 <button id="search">
@@ -44,14 +48,14 @@
                 <img src="" alt="Condições do tempo" id="weather-icon" />
             </div>
 
-            <div id="details-sun" style="border: 1px solid red;">
+            <div id="details-sun">
                 <p>
                     <i class="fa-solid fa-sun"></i>
-                    <span id="sunrise"></span>
+                    <span id="sunrise" style="font-weight: bold;"></span>
                 </p>
                 <p>
                     <i class="fa-solid fa-moon"></i>
-                    <span id="sunset"></span>
+                    <span id="sunset" style="font-weight: bold;"></span>
                 </p>
             </div>
 
